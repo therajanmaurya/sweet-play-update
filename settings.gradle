@@ -1,0 +1,3 @@
+rootProject.name='SweetPlayUpdateDemo'
+include ':app'
+include ':SweetUpdate'
