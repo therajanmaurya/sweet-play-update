@@ -6,10 +6,8 @@ src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_gener
 
 ## Sweet Play Designs
 <table>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/home.png"></td>
-    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/dashboard.png"></td>
-  </tr>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/home.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/dashboard.png"></td>
 </table>
 
 # Design Inspiration
