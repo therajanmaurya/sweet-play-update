@@ -5,6 +5,12 @@ src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_gener
  A Simple android library to handle google play udpate.
 
 ## Sweet Play Designs
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/home.png"></td>
+    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/dashboard.png"></td>
+  </tr>
+</table>
 
 # Design Inspiration
 
