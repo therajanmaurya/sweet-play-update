@@ -51,6 +51,7 @@ class SweetPlayAppUpdaterBottomSheet(
             false
         )
         binding.apply {
+            fragment = this@SweetPlayAppUpdaterBottomSheet
             title = this@SweetPlayAppUpdaterBottomSheet.title
             description = this@SweetPlayAppUpdaterBottomSheet.description
             headerImage = this@SweetPlayAppUpdaterBottomSheet.headerImage
@@ -72,7 +73,7 @@ class SweetPlayAppUpdaterBottomSheet(
     /**
      * Initialize AppUpdateManager and check update
      */
-    fun initAppUpdaterAndCheckForUpdate() {
+    private fun initAppUpdaterAndCheckForUpdate() {
         appUpdateManager = AppUpdateManagerFactory.create(context)
         registerListener()
         checkUpdateAvailable()
@@ -86,8 +87,6 @@ class SweetPlayAppUpdaterBottomSheet(
                 getString(R.string.install) -> completeUpdate()
             }
         }
-        // Hide the In-app-update UI if user selects later
-        binding.btnLater.setOnClickListener { dismiss() }
     }
 
     /**
@@ -100,7 +99,10 @@ class SweetPlayAppUpdaterBottomSheet(
             ) {
                 appUpdateInfo = it
                 binding.llUpdateAction.visibility = View.VISIBLE
+                binding.llCheckingUpdate.visibility = View.GONE
+                onStateUpdateChange(it.installStatus())
             } else {
+                binding.llUpdateAction.visibility = View.GONE
                 binding.llCheckingUpdate.visibility = View.GONE
                 binding.llNoUpdateAvailable.visibility = View.VISIBLE
                 unregisterListener()
@@ -151,23 +153,23 @@ class SweetPlayAppUpdaterBottomSheet(
         when (installStatus) {
             InstallStatus.PENDING -> {
                 binding.llUpdateAction.visibility = View.VISIBLE
+                binding.llCheckingUpdate.visibility = View.GONE
             }
             InstallStatus.DOWNLOADED -> {
                 binding.btnDownloadInstall.text = getString(R.string.install)
                 binding.tvUpdateAvailable.text = getString(R.string.app_update_downloaded)
                 binding.llUpdateAction.visibility = View.VISIBLE
-                binding.llUpdateAction.visibility = View.VISIBLE
                 binding.llUpdateDownloadProgress.visibility = View.GONE
             }
             InstallStatus.DOWNLOADING -> {
-                binding.llUpdateAction.visibility = View.VISIBLE
                 binding.llUpdateAction.visibility = View.GONE
+                binding.llCheckingUpdate.visibility = View.GONE
                 binding.llUpdateDownloadProgress.visibility = View.VISIBLE
             }
             InstallStatus.INSTALLING -> {
                 binding.tvUpdateProgress.text = getString(R.string.installing_update)
-                binding.llUpdateAction.visibility = View.VISIBLE
                 binding.llUpdateAction.visibility = View.GONE
+                binding.llCheckingUpdate.visibility = View.GONE
                 binding.llUpdateDownloadProgress.visibility = View.VISIBLE
             }
             InstallStatus.INSTALLED, InstallStatus.UNKNOWN -> {
@@ -175,6 +177,7 @@ class SweetPlayAppUpdaterBottomSheet(
             }
             else -> {
                 binding.llNoUpdateAvailable.visibility = View.GONE
+                binding.llCheckingUpdate.visibility = View.GONE
             }
         }
     }

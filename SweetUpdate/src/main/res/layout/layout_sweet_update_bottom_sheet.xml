@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="fragment"
+            type="com.github.sweet.play.update.SweetPlayAppUpdaterBottomSheet" />
+
+        <variable
             name="headerImage"
             type="Integer" />
 
@@ -81,6 +85,7 @@
             android:id="@+id/llUpdateAction"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:animateLayoutChanges="true"
             android:gravity="center"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +94,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLater"
-                style="@style/MaterialButtonStyle.Bordered"
+                android:onClick="@{() -> fragment.dismiss()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/layout_padding_16dp"
@@ -97,7 +102,6 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDownloadInstall"
-                style="@style/MaterialButtonStyle.Bordered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
@@ -110,6 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
+            android:animateLayoutChanges="true"
             android:gravity="center"
             android:orientation="horizontal"
             android:visibility="gone"
@@ -139,6 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
+            android:animateLayoutChanges="true"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="visible"
@@ -172,8 +178,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_padding_8dp"
+                android:text="@string/cancel"
                 android:textAllCaps="false"
-                android:text="@string/cancel" />
+                android:onClick="@{() -> fragment.dismiss()}"/>
 
         </LinearLayout>
 
@@ -181,10 +188,11 @@
             android:id="@+id/llNoUpdateAvailable"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:animateLayoutChanges="true"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llCheckingUpdate">
 
             <TextView
@@ -195,11 +203,12 @@
                 android:text="@string/no_update_available" />
 
             <com.google.android.material.button.MaterialButton
+                android:onClick="@{() -> fragment.dismiss()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_padding_8dp"
-                android:textAllCaps="false"
-                android:text="@string/ok" />
+                android:text="@string/ok"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 
