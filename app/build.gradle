@@ -11,8 +11,8 @@ android {
         applicationId "com.github.sweet.play.update.demo"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.6"
+        versionCode 13
+        versionName "1.13"
 
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
