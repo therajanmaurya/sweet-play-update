@@ -4,8 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.databinding.DataBindingUtil
 import com.github.sweet.play.update.SweetPlayAppUpdater
 import com.github.sweet.play.update.SweetPlayAppUpdater.Companion.REQUEST_CODE_FLEXIBLE_UPDATE
+import com.github.sweet.play.update.demo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,10 +16,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        sweetAppUpdater = SweetPlayAppUpdater(this, findViewById(android.R.id.content)).apply {
+        val binding =
+            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+                .apply {
+                    lifecycleOwner = this@MainActivity
+                    mainActivity = this@MainActivity
+                }
+        sweetAppUpdater = SweetPlayAppUpdater(this, binding.root).apply {
             initAppUpdaterAndCheckForUpdate()
         }
+    }
+
+    fun checkUpdatesInBottomSheet() {
+        Log.d("MainActivity", "Check Update")
     }
 
     override fun onResume() {

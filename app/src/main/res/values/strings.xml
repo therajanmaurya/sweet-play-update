@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">SweetPlayUpdateDemo</string>
+  <string name="version_code_and_name">Version Code: %1$d and Version Name: %2$s</string>
+  <string name="check_updates">Check Updates</string>
 </resources>
