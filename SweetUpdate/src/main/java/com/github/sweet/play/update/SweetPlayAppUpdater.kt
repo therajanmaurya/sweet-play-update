@@ -87,7 +87,6 @@ class SweetPlayAppUpdater constructor(private val context: Activity, private val
      */
     override fun onStateUpdate(state: InstallState) {
         onStateUpdateChange(state.installStatus())
-        //onStateUpdateChange.invoke(state.installStatus())
     }
 
     // If the update is downloaded but not installed,

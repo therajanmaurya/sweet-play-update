@@ -9,4 +9,8 @@
     <string name="downloading">Downloading…</string>
     <string name="installing_update">Installing Updates</string>
     <string name="in_app_update">In-App-Update</string>
+    <string name="checking_for_update">Checking for update</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="no_update_available">No update available!</string>
 </resources>
