@@ -1,10 +1,14 @@
 package com.github.sweet.play.update
 
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
-import com.google.android.material.button.MaterialButton
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import com.github.sweet.play.update.databinding.LayoutSweetUpdateBottomSheetBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -14,40 +18,61 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 
-class SweetPlayAppUpdaterBottomSheet constructor(
-    private val context: Activity,
-    private val view: View
-) :
-    InstallStateUpdatedListener {
+class SweetPlayAppUpdaterBottomSheet(
+    private val title: String,
+    private val description: String,
+    private val headerImage: Int
+) : BottomSheetDialogFragment(), InstallStateUpdatedListener {
 
     private lateinit var appUpdateManager: AppUpdateManager
     private lateinit var appUpdateInfo: AppUpdateInfo
 
-    private lateinit var llDownloadUpdate: LinearLayout
-    private lateinit var btnDownloadInstall: MaterialButton
-    private lateinit var btnLater: MaterialButton
-    private lateinit var tvUpdateAvailable: TextView
-    private lateinit var tvUpdateAvailableMessage: TextView
-    private lateinit var llUpdateAction: LinearLayout
-    private lateinit var llUpdateDownloadProgress: LinearLayout
-    private lateinit var tvUpdateProgress: TextView
+    lateinit var binding: LayoutSweetUpdateBottomSheetBinding
 
-    private fun initializeUIComponent(view: View) {
-        tvUpdateAvailable = view.findViewById(R.id.tvUpdateAvailable)
-        llDownloadUpdate = view.findViewById(R.id.llDownloadUpdate)
-        btnDownloadInstall = view.findViewById(R.id.btnDownloadInstall)
-        btnLater = view.findViewById(R.id.btnLater)
-        tvUpdateAvailableMessage = view.findViewById(R.id.tvUpdateAvailableMessage)
-        llUpdateAction = view.findViewById(R.id.llUpdateAction)
-        llUpdateDownloadProgress = view.findViewById(R.id.llUpdateDownloadProgress)
-        tvUpdateProgress = view.findViewById(R.id.tvUpdateProgress)
+    companion object {
+        fun newInstant(
+            title: String,
+            description: String,
+            headerImage: Int
+        ) = SweetPlayAppUpdaterBottomSheet(title, description, headerImage)
+
+        const val REQUEST_CODE_FLEXIBLE_UPDATE = 17362
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.layout_sweet_update_bottom_sheet,
+            null,
+            false
+        )
+        binding.apply {
+            title = this@SweetPlayAppUpdaterBottomSheet.title
+            description = this@SweetPlayAppUpdaterBottomSheet.description
+            headerImage = this@SweetPlayAppUpdaterBottomSheet.headerImage
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initAppUpdaterAndCheckForUpdate()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Check all update is already downloaded or not if then show install update ui only
+        ifUpdateDownloadedThenInstall()
     }
 
     /**
      * Initialize AppUpdateManager and check update
      */
     fun initAppUpdaterAndCheckForUpdate() {
-        initializeUIComponent(view)
         appUpdateManager = AppUpdateManagerFactory.create(context)
         registerListener()
         checkUpdateAvailable()
@@ -55,28 +80,29 @@ class SweetPlayAppUpdaterBottomSheet constructor(
         /**
          * If update is available then start update otherwise show install update button
          */
-        btnDownloadInstall.setOnClickListener {
-            when (btnDownloadInstall.text) {
-                context.getString(R.string.update) -> startForInAppUpdate()
-                context.getString(R.string.install) -> completeUpdate()
+        binding.btnDownloadInstall.setOnClickListener {
+            when (binding.btnDownloadInstall.text) {
+                getString(R.string.update) -> startForInAppUpdate()
+                getString(R.string.install) -> completeUpdate()
             }
         }
         // Hide the In-app-update UI if user selects later
-        btnLater.setOnClickListener { llDownloadUpdate.visibility = View.GONE }
+        binding.btnLater.setOnClickListener { dismiss() }
     }
 
     /**
      * Check Update is available or not
      */
-    fun checkUpdateAvailable() {
+    private fun checkUpdateAvailable() {
         appUpdateManager.appUpdateInfo.addOnSuccessListener {
             if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
                 it.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
             ) {
                 appUpdateInfo = it
-                llDownloadUpdate.visibility = View.VISIBLE
+                binding.llUpdateAction.visibility = View.VISIBLE
             } else {
-                llDownloadUpdate.visibility = View.GONE
+                binding.llCheckingUpdate.visibility = View.GONE
+                binding.llNoUpdateAvailable.visibility = View.VISIBLE
                 unregisterListener()
             }
         }
@@ -91,7 +117,7 @@ class SweetPlayAppUpdaterBottomSheet constructor(
 
     // If the update is downloaded but not installed,
     // notify the user to complete the update.
-    fun ifUpdateDownloadedThenInstall() {
+    private fun ifUpdateDownloadedThenInstall() {
         appUpdateManager
             .appUpdateInfo
             .addOnSuccessListener { appUpdateInfo ->
@@ -108,7 +134,7 @@ class SweetPlayAppUpdaterBottomSheet constructor(
         appUpdateManager.startUpdateFlowForResult(
             appUpdateInfo,
             AppUpdateType.FLEXIBLE,
-            context,
+            requireActivity(),
             REQUEST_CODE_FLEXIBLE_UPDATE
         )
     }
@@ -124,40 +150,51 @@ class SweetPlayAppUpdaterBottomSheet constructor(
     private fun onStateUpdateChange(installStatus: Int) {
         when (installStatus) {
             InstallStatus.PENDING -> {
-                llDownloadUpdate.visibility = View.VISIBLE
+                binding.llUpdateAction.visibility = View.VISIBLE
             }
             InstallStatus.DOWNLOADED -> {
-                btnDownloadInstall.text = context.getString(R.string.install)
-                tvUpdateAvailable.text = context.getString(R.string.app_update_downloaded)
-                llDownloadUpdate.visibility = View.VISIBLE
-                llUpdateAction.visibility = View.VISIBLE
-                llUpdateDownloadProgress.visibility = View.GONE
+                binding.btnDownloadInstall.text = getString(R.string.install)
+                binding.tvUpdateAvailable.text = getString(R.string.app_update_downloaded)
+                binding.llUpdateAction.visibility = View.VISIBLE
+                binding.llUpdateAction.visibility = View.VISIBLE
+                binding.llUpdateDownloadProgress.visibility = View.GONE
             }
             InstallStatus.DOWNLOADING -> {
-                llDownloadUpdate.visibility = View.VISIBLE
-                llUpdateAction.visibility = View.GONE
-                llUpdateDownloadProgress.visibility = View.VISIBLE
+                binding.llUpdateAction.visibility = View.VISIBLE
+                binding.llUpdateAction.visibility = View.GONE
+                binding.llUpdateDownloadProgress.visibility = View.VISIBLE
             }
             InstallStatus.INSTALLING -> {
-                tvUpdateProgress.text = context.getString(R.string.installing_update)
-                llDownloadUpdate.visibility = View.VISIBLE
-                llUpdateAction.visibility = View.GONE
-                llUpdateDownloadProgress.visibility = View.VISIBLE
+                binding.tvUpdateProgress.text = getString(R.string.installing_update)
+                binding.llUpdateAction.visibility = View.VISIBLE
+                binding.llUpdateAction.visibility = View.GONE
+                binding.llUpdateDownloadProgress.visibility = View.VISIBLE
             }
             InstallStatus.INSTALLED, InstallStatus.UNKNOWN -> {
-                llDownloadUpdate.visibility = View.GONE
+                binding.llNoUpdateAvailable.visibility = View.GONE
             }
             else -> {
-                llDownloadUpdate.visibility = View.GONE
+                binding.llNoUpdateAvailable.visibility = View.GONE
             }
         }
     }
 
     private fun registerListener() = appUpdateManager.registerListener(this)
 
-    fun unregisterListener() = appUpdateManager.unregisterListener(this)
+    private fun unregisterListener() = appUpdateManager.unregisterListener(this)
 
-    companion object {
-        const val REQUEST_CODE_FLEXIBLE_UPDATE = 17362
+    // If user ignore the update then re-check update as user may want to install the update later
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == SweetPlayAppUpdater.REQUEST_CODE_FLEXIBLE_UPDATE
+            && resultCode != Activity.RESULT_OK
+        ) {
+            checkUpdateAvailable()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        unregisterListener()
     }
 }
