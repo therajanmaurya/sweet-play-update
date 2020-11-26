@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
                 android:layout_weight="1"
-                android:text="@string/update" />
+                android:text="@string/download" />
 
         </LinearLayout>
 

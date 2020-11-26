@@ -1,7 +1,6 @@
 package com.github.sweet.play.update
 
 import android.app.Activity
-import android.content.Context
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -57,7 +56,7 @@ class SweetPlayAppUpdater constructor(private val context: Activity, private val
          */
         btnDownloadInstall.setOnClickListener {
             when (btnDownloadInstall.text) {
-                context.getString(R.string.update) -> startForInAppUpdate()
+                context.getString(R.string.download) -> startForInAppUpdate()
                 context.getString(R.string.install) -> completeUpdate()
             }
         }

@@ -3,6 +3,7 @@ package com.github.sweet.play.update
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,7 +84,7 @@ class SweetPlayAppUpdaterBottomSheet(
          */
         binding.btnDownloadInstall.setOnClickListener {
             when (binding.btnDownloadInstall.text) {
-                getString(R.string.update) -> startForInAppUpdate()
+                getString(R.string.download) -> startForInAppUpdate()
                 getString(R.string.install) -> completeUpdate()
             }
         }
@@ -103,12 +104,12 @@ class SweetPlayAppUpdaterBottomSheet(
                 binding.llNoUpdateAvailable.visibility = View.GONE
                 binding.llUpdateDownloadProgress.visibility = View.GONE
             } else {
-                binding.llUpdateAction.visibility = View.GONE
-                binding.llCheckingUpdate.visibility = View.GONE
-                binding.llUpdateDownloadProgress.visibility = View.GONE
-                binding.llNoUpdateAvailable.visibility = View.VISIBLE
+                noUpdateAvailable()
                 unregisterListener()
             }
+        }
+        appUpdateManager.appUpdateInfo.addOnFailureListener {
+            noUpdateAvailable()
         }
     }
 
@@ -203,6 +204,13 @@ class SweetPlayAppUpdaterBottomSheet(
         ) {
             checkUpdateAvailable()
         }
+    }
+
+    private fun noUpdateAvailable() {
+        binding.llUpdateAction.visibility = View.GONE
+        binding.llCheckingUpdate.visibility = View.GONE
+        binding.llUpdateDownloadProgress.visibility = View.GONE
+        binding.llNoUpdateAvailable.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {
