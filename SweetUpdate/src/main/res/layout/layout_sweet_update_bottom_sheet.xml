@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            tools:text="@string/app_update_available" />
+            tools:text="@string/sweet_app_update_available" />
 
         <TextView
             android:id="@+id/tvUpdateAvailableMessage"
@@ -73,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUpdateAvailable"
-            tools:text="@string/app_update_available_message" />
+            tools:text="@string/sweet_app_update_available_message" />
 
         <View
             android:id="@+id/view"

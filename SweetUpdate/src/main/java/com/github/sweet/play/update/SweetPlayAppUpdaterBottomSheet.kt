@@ -167,7 +167,7 @@ class SweetPlayAppUpdaterBottomSheet(
             }
             InstallStatus.DOWNLOADED -> {
                 binding.btnDownloadInstall.text = getString(R.string.install)
-                binding.tvUpdateAvailable.text = getString(R.string.app_update_downloaded)
+                binding.tvUpdateAvailable.text = getString(R.string.sweet_app_update_downloaded)
                 binding.llUpdateAction.visibility = View.VISIBLE
                 binding.llUpdateDownloadProgress.visibility = View.GONE
                 binding.llNoUpdateAvailable.visibility = View.GONE

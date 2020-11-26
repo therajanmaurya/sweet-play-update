@@ -134,7 +134,7 @@ class SweetPlayAppUpdater constructor(private val context: Activity, private val
             }
             InstallStatus.DOWNLOADED -> {
                 btnDownloadInstall.text = context.getString(R.string.install)
-                tvUpdateAvailable.text = context.getString(R.string.app_update_downloaded)
+                tvUpdateAvailable.text = context.getString(R.string.sweet_app_update_downloaded)
                 llDownloadUpdate.visibility = View.VISIBLE
                 llUpdateAction.visibility = View.VISIBLE
                 llUpdateDownloadProgress.visibility = View.GONE

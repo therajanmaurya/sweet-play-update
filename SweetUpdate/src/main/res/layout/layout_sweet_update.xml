@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:text="@string/app_update_available"
+                    android:text="@string/sweet_app_update_available"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
                     style="@style/Base.TextAppearance.AppCompat.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_update_available_message"
+                    android:text="@string/sweet_app_update_available_message"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_14sp" />
 

@@ -3,9 +3,9 @@
     <string name="download">Download</string>
     <string name="later">Later</string>
     <string name="install">Install</string>
-    <string name="app_update_available">Update Available</string>
-    <string name="app_update_downloaded">Update Downloaded</string>
-    <string name="app_update_available_message">We have fixed some issues and added some cool feature in this update</string>
+    <string name="sweet_app_update_available">Update Available</string>
+    <string name="sweet_app_update_downloaded">Update Downloaded</string>
+    <string name="sweet_app_update_available_message">We have fixed some issues and added some cool feature in this update</string>
     <string name="downloading">Downloading…</string>
     <string name="installing_update">Installing Updates</string>
     <string name="in_app_update">In-App-Update</string>
