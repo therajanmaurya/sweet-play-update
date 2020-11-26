@@ -28,20 +28,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="50dp">
+        android:paddingBottom="32dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:contentDescription="@string/app_name"
             app:imageResource="@{headerImage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             tools:srcCompat="@drawable/ic_android_black_24dp" />
 
         <TextView
@@ -94,10 +95,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLater"
-                android:onClick="@{() -> fragment.dismiss()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/layout_padding_16dp"
+                android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/later" />
 
             <com.google.android.material.button.MaterialButton
@@ -178,9 +179,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_padding_8dp"
+                android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/cancel"
-                android:textAllCaps="false"
-                android:onClick="@{() -> fragment.dismiss()}"/>
+                android:textAllCaps="false" />
 
         </LinearLayout>
 
@@ -204,10 +205,10 @@
                 android:text="@string/no_update_available" />
 
             <com.google.android.material.button.MaterialButton
-                android:onClick="@{() -> fragment.dismiss()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_padding_8dp"
+                android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/ok"
                 android:textAllCaps="false" />
 
