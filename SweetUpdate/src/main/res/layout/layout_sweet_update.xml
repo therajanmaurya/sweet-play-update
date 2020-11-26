@@ -77,7 +77,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLater"
-                style="@style/MaterialButtonStyle.Bordered"
+                style="@style/MaterialButtonStyle.BorderedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
@@ -86,7 +86,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDownloadInstall"
-                style="@style/MaterialButtonStyle.Bordered"
+                style="@style/MaterialButtonStyle.BorderedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
@@ -113,7 +113,7 @@
 
             <TextView
                 android:id="@+id/tvUpdateProgress"
-                style="@style/MaterialButtonStyle.Bordered"
+                style="@style/MaterialButtonStyle.BorderedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
