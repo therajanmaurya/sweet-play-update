@@ -207,6 +207,7 @@ class SweetPlayAppUpdaterBottomSheet(
 
     private fun noUpdateAvailable() {
         binding.tvUpdateAvailable.text = getString(R.string.no_update_available)
+        binding.tvUpdateAvailableMessage.visibility = View.GONE
         binding.llUpdateAction.visibility = View.GONE
         binding.llCheckingUpdate.visibility = View.GONE
         binding.llUpdateDownloadProgress.visibility = View.GONE
