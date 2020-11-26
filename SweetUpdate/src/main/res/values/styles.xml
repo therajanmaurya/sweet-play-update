@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MaterialButtonStyle.BorderedButton" parent="Widget.AppCompat.Button.Borderless" >
+    <style name="SweetButtonStyle.Bordered" parent="Widget.AppCompat.Button.Borderless" >
         <item name="strokeWidth">@dimen/material_button_stroke_bordered</item>
         <item name="strokeColor">@color/colorPrimary</item>
         <item name="rippleColor">@color/material_button_ripple_color</item>

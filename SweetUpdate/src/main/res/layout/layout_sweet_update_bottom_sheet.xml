@@ -131,7 +131,7 @@
 
             <TextView
                 android:id="@+id/tvUpdateProgress"
-                style="@style/MaterialButtonStyle.BorderedButton"
+                style="@style/SweetButtonStyle.Bordered"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
@@ -166,7 +166,7 @@
 
                 <TextView
                     android:id="@+id/tvCheckingUpdate"
-                    style="@style/MaterialButtonStyle.BorderedButton"
+                    style="@style/SweetButtonStyle.Bordered"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/layout_padding_16dp"
@@ -198,7 +198,7 @@
 
             <TextView
                 android:id="@+id/tvUpdateInstallState"
-                style="@style/MaterialButtonStyle.BorderedButton"
+                style="@style/SweetButtonStyle.Bordered"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
