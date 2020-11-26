@@ -197,14 +197,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llCheckingUpdate">
 
-            <TextView
-                android:id="@+id/tvUpdateInstallState"
-                style="@style/SweetButtonStyle.Bordered"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/no_update_available" />
-
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

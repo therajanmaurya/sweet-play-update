@@ -184,7 +184,6 @@ class SweetPlayAppUpdaterBottomSheet(
                 binding.llUpdateDownloadProgress.visibility = View.VISIBLE
             }
             InstallStatus.INSTALLED -> {
-                binding.tvUpdateInstallState.text = getString(R.string.update_installed)
                 binding.llNoUpdateAvailable.visibility = View.VISIBLE
             }
             InstallStatus.UNKNOWN -> {
@@ -207,6 +206,7 @@ class SweetPlayAppUpdaterBottomSheet(
     }
 
     private fun noUpdateAvailable() {
+        binding.tvUpdateAvailable.text = getString(R.string.no_update_available)
         binding.llUpdateAction.visibility = View.GONE
         binding.llCheckingUpdate.visibility = View.GONE
         binding.llUpdateDownloadProgress.visibility = View.GONE
