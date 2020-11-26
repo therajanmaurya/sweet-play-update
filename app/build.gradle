@@ -11,8 +11,8 @@ android {
         applicationId "com.github.sweet.play.update.demo"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 20
-        versionName "1.20"
+        versionCode 33
+        versionName "1.33"
 
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -31,6 +31,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            debuggable true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

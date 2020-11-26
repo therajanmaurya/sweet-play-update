@@ -3,7 +3,6 @@ package com.github.sweet.play.update
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class SweetPlayAppUpdaterBottomSheet(
             headerImage: Int
         ) = SweetPlayAppUpdaterBottomSheet(title, description, headerImage)
 
-        const val REQUEST_CODE_FLEXIBLE_UPDATE = 17362
+        const val REQUEST_CODE_FLEXIBLE_UPDATE = 17363
     }
 
     override fun onCreateView(
@@ -75,7 +74,7 @@ class SweetPlayAppUpdaterBottomSheet(
      * Initialize AppUpdateManager and check update
      */
     private fun initAppUpdaterAndCheckForUpdate() {
-        appUpdateManager = AppUpdateManagerFactory.create(context)
+        appUpdateManager = AppUpdateManagerFactory.create(requireActivity())
         registerListener()
         checkUpdateAvailable()
 
@@ -94,6 +93,7 @@ class SweetPlayAppUpdaterBottomSheet(
      * Check Update is available or not
      */
     private fun checkUpdateAvailable() {
+        checkForUpdateViewVisibility()
         appUpdateManager.appUpdateInfo.addOnSuccessListener {
             if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
                 it.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
@@ -125,9 +125,14 @@ class SweetPlayAppUpdaterBottomSheet(
     private fun ifUpdateDownloadedThenInstall() {
         appUpdateManager
             .appUpdateInfo
-            .addOnSuccessListener { appUpdateInfo ->
-                if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                    onStateUpdateChange(appUpdateInfo.installStatus())
+            .addOnSuccessListener {
+                if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                    it.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+                ) {
+                    appUpdateInfo = it
+                }
+                if (it.installStatus() == InstallStatus.DOWNLOADED) {
+                    onStateUpdateChange(it.installStatus())
                 }
             }
     }
@@ -169,10 +174,7 @@ class SweetPlayAppUpdaterBottomSheet(
                 binding.llCheckingUpdate.visibility = View.GONE
             }
             InstallStatus.DOWNLOADING -> {
-                binding.llUpdateAction.visibility = View.GONE
-                binding.llCheckingUpdate.visibility = View.GONE
-                binding.llNoUpdateAvailable.visibility = View.GONE
-                binding.llUpdateDownloadProgress.visibility = View.VISIBLE
+                downloadingViewVisibility()
             }
             InstallStatus.INSTALLING -> {
                 binding.tvUpdateProgress.text = getString(R.string.installing_update)
@@ -199,9 +201,7 @@ class SweetPlayAppUpdaterBottomSheet(
     // If user ignore the update then re-check update as user may want to install the update later
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SweetPlayAppUpdater.REQUEST_CODE_FLEXIBLE_UPDATE
-            && resultCode != Activity.RESULT_OK
-        ) {
+        if (requestCode == REQUEST_CODE_FLEXIBLE_UPDATE && resultCode != Activity.RESULT_OK) {
             checkUpdateAvailable()
         }
     }
@@ -211,6 +211,20 @@ class SweetPlayAppUpdaterBottomSheet(
         binding.llCheckingUpdate.visibility = View.GONE
         binding.llUpdateDownloadProgress.visibility = View.GONE
         binding.llNoUpdateAvailable.visibility = View.VISIBLE
+    }
+
+    private fun downloadingViewVisibility() {
+        binding.llUpdateAction.visibility = View.GONE
+        binding.llCheckingUpdate.visibility = View.GONE
+        binding.llNoUpdateAvailable.visibility = View.GONE
+        binding.llUpdateDownloadProgress.visibility = View.VISIBLE
+    }
+
+    private fun checkForUpdateViewVisibility() {
+        binding.llUpdateAction.visibility = View.GONE
+        binding.llUpdateDownloadProgress.visibility = View.GONE
+        binding.llNoUpdateAvailable.visibility = View.GONE
+        binding.llCheckingUpdate.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {
