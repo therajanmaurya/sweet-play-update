@@ -2,6 +2,7 @@ package com.github.sweet.play.update
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,8 @@ import com.google.android.play.core.install.model.UpdateAvailability
 class SweetPlayAppUpdaterBottomSheet(
     private val title: String,
     private val description: String,
-    private val headerImage: Int
+    private val headerImage: Int,
+    private val typeface: Typeface? = null
 ) : BottomSheetDialogFragment(), InstallStateUpdatedListener {
 
     private lateinit var appUpdateManager: AppUpdateManager
@@ -55,6 +57,18 @@ class SweetPlayAppUpdaterBottomSheet(
             title = this@SweetPlayAppUpdaterBottomSheet.title
             description = this@SweetPlayAppUpdaterBottomSheet.description
             headerImage = this@SweetPlayAppUpdaterBottomSheet.headerImage
+
+            typeface?.let {
+                tvUpdateAvailable.typeface = it
+                tvUpdateAvailableMessage.typeface = it
+                tvUpdateProgress.typeface = it
+                tvCheckingUpdate.typeface = it
+
+                btnLater.typeface = it
+                btnDownloadInstall.typeface = it
+                btnCancel.typeface = it
+                btnOk.typeface = it
+            }
         }
         return binding.root
     }

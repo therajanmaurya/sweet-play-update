@@ -7,4 +7,5 @@
     <dimen name="material_button_stroke_borderless">0dp</dimen>
     <dimen name="material_button_stroke_bordered">1dp</dimen>
     <dimen name="material_button_text_size">12sp</dimen>
+    <dimen name="corner_radius">4dp</dimen>
 </resources>

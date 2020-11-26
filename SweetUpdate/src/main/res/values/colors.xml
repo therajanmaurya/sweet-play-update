@@ -5,4 +5,9 @@
     <color name="colorAccent">#1E88E5</color>
     <color name="black">#000000</color>
     <color name="material_button_ripple_color">#33AAAAAA</color>
+    <color name="blue_start">#1976d2</color>
+    <color name="blue_end">#2196f3</color>
+    <color name="text_color">#333333</color>
+    <color name="white">#FFF</color>
+    <color name="button_stroke_color">#1E88E5</color>
 </resources>

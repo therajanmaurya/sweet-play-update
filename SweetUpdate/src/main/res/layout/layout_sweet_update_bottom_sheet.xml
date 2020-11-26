@@ -27,34 +27,65 @@
         android:id="@+id/llDownloadUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="32dp">
+        android:orientation="vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="24dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerInside"
-            app:imageResource="@{headerImage}"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/shp_header_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            tools:srcCompat="@drawable/ic_android_black_24dp" />
+            app:srcCompat="@drawable/ic_dashboard_background" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_full_round"
+            android:contentDescription="@string/app_name"
+            app:imageResource="@{headerImage}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvUpdateAvailable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:gravity="center"
             android:text="@{title}"
+            android:textColor="#fff"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,18 +101,11 @@
             android:layout_marginEnd="32dp"
             android:gravity="center"
             android:text="@{description}"
+            android:textColor="#B9FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUpdateAvailable"
             tools:text="@string/sweet_app_update_available_message" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUpdateAvailableMessage" />
 
         <LinearLayout
             android:id="@+id/llUpdateAction"
@@ -92,7 +116,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintTop_toBottomOf="@+id/tvUpdateAvailableMessage">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLater"
@@ -127,6 +151,8 @@
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/white"
                 android:scaleX="0.5"
                 android:scaleY="0.5" />
 
@@ -148,8 +174,8 @@
             android:layout_gravity="center"
             android:animateLayoutChanges="true"
             android:gravity="center"
+            android:paddingBottom="24dp"
             android:orientation="vertical"
-            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llUpdateDownloadProgress">
@@ -162,6 +188,8 @@
                 <ProgressBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/white"
                     android:scaleX="0.5"
                     android:scaleY="0.5" />
 
@@ -172,14 +200,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/layout_padding_16dp"
                     android:layout_weight="1"
-                    android:text="@string/checking_for_update" />
+                    android:text="@string/checking_for_update"/>
 
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_padding_8dp"
+                android:textColor="@color/text_color"
+                style="@style/MaterialButtonStyle.Bordered"
                 android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/cancel"
                 android:textAllCaps="false" />
@@ -194,13 +224,17 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
+            android:paddingBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llCheckingUpdate">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_padding_8dp"
+                android:textColor="@color/text_color"
+                style="@style/MaterialButtonStyle.Bordered"
                 android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/ok"
                 android:textAllCaps="false" />
