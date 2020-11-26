@@ -17,7 +17,8 @@ import com.google.android.play.core.install.model.UpdateAvailability
 /**
  *  SweetAppUpdater Utils class
  */
-class SweetPlayAppUpdater constructor(private val context: Activity, private val view: View) : InstallStateUpdatedListener {
+class SweetPlayAppUpdater constructor(private val context: Activity, private val view: View) :
+    InstallStateUpdatedListener {
 
     private lateinit var appUpdateManager: AppUpdateManager
     private lateinit var appUpdateInfo: AppUpdateInfo
@@ -94,9 +95,14 @@ class SweetPlayAppUpdater constructor(private val context: Activity, private val
         appUpdateManager
             .appUpdateInfo
             .addOnSuccessListener { appUpdateInfo ->
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                    appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+                ) {
+                    this.appUpdateInfo = appUpdateInfo
+                    llDownloadUpdate.visibility = View.VISIBLE
+                }
                 if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
                     onStateUpdateChange(appUpdateInfo.installStatus())
-                    //onStateUpdateChange.invoke(appUpdateInfo.installStatus())
                 }
             }
     }
