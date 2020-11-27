@@ -62,7 +62,7 @@ class SweetPlayAppUpdaterBottomSheet(
             headerImage = this@SweetPlayAppUpdaterBottomSheet.headerImage
             bsBackground = this@SweetPlayAppUpdaterBottomSheet.background
 
-            /*typeface?.let {
+            typeface?.let {
                 tvUpdateAvailable.typeface = it
                 tvUpdateAvailableMessage.typeface = it
                 tvUpdateProgress.typeface = it
@@ -72,7 +72,7 @@ class SweetPlayAppUpdaterBottomSheet(
                 btnDownloadInstall.typeface = it
                 btnCancel.typeface = it
                 btnOk.typeface = it
-            }*/
+            }
         }
         return binding.root
     }

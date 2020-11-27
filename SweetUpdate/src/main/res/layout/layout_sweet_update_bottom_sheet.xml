@@ -137,8 +137,6 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLater"
                 style="@style/SweetButtonStyle.BorderedOutlined"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/layout_padding_16dp"
                 android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/later" />
@@ -146,8 +144,6 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDownloadInstall"
                 style="@style/SweetButtonStyle.BorderedOutlined"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
                 android:text="@string/download" />
 
@@ -226,8 +222,6 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCancel"
                 style="@style/SweetButtonStyle.BorderedOutlined"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/cancel"
                 android:textAllCaps="false" />
@@ -249,8 +243,6 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnOk"
                 style="@style/SweetButtonStyle.BorderedOutlined"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_padding_8dp"
                 android:onClick="@{() -> fragment.dismiss()}"
                 android:text="@string/ok"
