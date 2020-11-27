@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
         SweetPlayAppUpdaterBottomSheet.newInstant(
             "App Update Available",
             "We have fixed some issues and added some cool feature in this update",
-            R.drawable.ic_android_black_24dp
+            R.drawable.ic_android_black_24dp,
+            null,
+            R.drawable.shp_header_background
         ).apply { isCancelable = false }
             .show(supportFragmentManager, "Check Update")
     }
