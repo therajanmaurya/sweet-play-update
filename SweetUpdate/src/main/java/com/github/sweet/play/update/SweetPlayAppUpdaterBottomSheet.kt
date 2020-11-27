@@ -2,6 +2,8 @@ package com.github.sweet.play.update
 
 import android.app.Activity
 import android.content.Intent
+import android.content.IntentSender
+import android.content.IntentSender.SendIntentException
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,8 +25,8 @@ class SweetPlayAppUpdaterBottomSheet(
     private val title: String,
     private val description: String,
     private val headerImage: Int,
-    private val typeface: Typeface? = null,
-    private val background: Int
+    private val background: Int,
+    private val textFont: TextFont? = null
 ) : BottomSheetDialogFragment(), InstallStateUpdatedListener {
 
     private lateinit var appUpdateManager: AppUpdateManager
@@ -37,9 +39,9 @@ class SweetPlayAppUpdaterBottomSheet(
             title: String,
             description: String,
             headerImage: Int,
-            typeface: Typeface?,
-            background: Int
-        ) = SweetPlayAppUpdaterBottomSheet(title, description, headerImage, typeface, background)
+            background: Int,
+            textFont: TextFont? = null
+        ) = SweetPlayAppUpdaterBottomSheet(title, description, headerImage, background, textFont)
 
         const val REQUEST_CODE_FLEXIBLE_UPDATE = 17363
     }
@@ -62,16 +64,19 @@ class SweetPlayAppUpdaterBottomSheet(
             headerImage = this@SweetPlayAppUpdaterBottomSheet.headerImage
             bsBackground = this@SweetPlayAppUpdaterBottomSheet.background
 
-            typeface?.let {
-                tvUpdateAvailable.typeface = it
-                tvUpdateAvailableMessage.typeface = it
-                tvUpdateProgress.typeface = it
-                tvCheckingUpdate.typeface = it
-
-                btnLater.typeface = it
-                btnDownloadInstall.typeface = it
-                btnCancel.typeface = it
-                btnOk.typeface = it
+            textFont?.let { textFont ->
+                textFont.title?.let { tvUpdateAvailable.typeface = it }
+                textFont.desc?.let { tvUpdateAvailableMessage.typeface = it }
+                textFont.progressTitle?.let {
+                    tvUpdateProgress.typeface = it
+                    tvCheckingUpdate.typeface = it
+                }
+                textFont.button?.let {
+                    btnLater.typeface = it
+                    btnDownloadInstall.typeface = it
+                    btnCancel.typeface = it
+                    btnOk.typeface = it
+                }
             }
         }
         return binding.root
@@ -159,12 +164,16 @@ class SweetPlayAppUpdaterBottomSheet(
      * Start downloading updates
      */
     private fun startForInAppUpdate() {
-        appUpdateManager.startUpdateFlowForResult(
-            appUpdateInfo,
-            AppUpdateType.FLEXIBLE,
-            requireActivity(),
-            REQUEST_CODE_FLEXIBLE_UPDATE
-        )
+        try {
+            appUpdateManager.startUpdateFlowForResult(
+                appUpdateInfo,
+                AppUpdateType.FLEXIBLE,
+                requireActivity(),
+                REQUEST_CODE_FLEXIBLE_UPDATE
+            )
+        } catch (e: SendIntentException) {
+            e.printStackTrace()
+        }
     }
 
     /**
@@ -251,3 +260,11 @@ class SweetPlayAppUpdaterBottomSheet(
         unregisterListener()
     }
 }
+
+data class TextFont(
+    val title: Typeface? = null,
+    val desc: Typeface? = null,
+    val progressTitle: Typeface? = null,
+    val msg: Typeface? = null,
+    val button: Typeface? = null
+)
