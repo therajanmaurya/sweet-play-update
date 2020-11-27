@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import com.github.sweet.play.update.SweetPlayAppUpdater
 import com.github.sweet.play.update.SweetPlayAppUpdater.Companion.REQUEST_CODE_FLEXIBLE_UPDATE
 import com.github.sweet.play.update.SweetPlayAppUpdaterBottomSheet
+import com.github.sweet.play.update.TextFont
 import com.github.sweet.play.update.demo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,12 +30,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkUpdatesInBottomSheet() {
+
+        // Testing purpose only
+        val typeface = ResourcesCompat.getFont(this, R.font.nunito)
+
         SweetPlayAppUpdaterBottomSheet.newInstant(
             "App Update Available",
             "We have fixed some issues and added some cool feature in this update",
             R.drawable.ic_android_black_24dp,
-            null,
-            R.drawable.shp_header_background
+            R.drawable.shp_header_background,
+            TextFont(
+                title = typeface,
+                desc = typeface,
+                progressTitle = typeface,
+                msg = typeface
+            )
         ).apply { isCancelable = false }
             .show(supportFragmentManager, "Check Update")
     }
