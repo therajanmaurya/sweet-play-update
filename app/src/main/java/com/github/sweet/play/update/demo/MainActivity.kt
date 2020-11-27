@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
                 title = typeface,
                 desc = typeface,
                 progressTitle = typeface,
-                msg = typeface
+                msg = typeface,
+                button = typeface
             )
         ).apply { isCancelable = false }
             .show(supportFragmentManager, "Check Update")

@@ -20,7 +20,8 @@ allprojects {
  
 ```gradle
 dependencies {
-	implementation 'com.github.therajanmaurya:sweet-play-update:1.4.7'
+    Note use latest version on `JitPack`
+	implementation 'com.github.therajanmaurya:sweet-play-update:1.5.4'
 }
 ```
 
@@ -29,12 +30,21 @@ dependencies {
 For Sweet Play Update using Bottom sheet 
 
 ```kotlin
+ val typeface = ResourcesCompat.getFont(this, R.font.nunito)
 SweetPlayAppUpdaterBottomSheet.newInstant(
             "App Update Available",
             "We have fixed some issues and added some cool feature in this update",
-            R.drawable.ic_android_black_24dp
+            R.drawable.ic_android_black_24dp,
+            R.drawable.shp_header_background,
+            TextFont(
+                title = typeface,
+                desc = typeface,
+                progressTitle = typeface,
+                msg = typeface,
+                button = typeface
+            )
         ).apply { isCancelable = false }
-            .show(supportFragmentManager, "Check Update")
+         .show(supportFragmentManager, "Check Update")
 ```
 
 For Sweet Play Update on somewhere dashboard
@@ -103,8 +113,14 @@ src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_gener
 
 ## Sweet Play Designs
 <table>
-  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/home.png"></td>
   <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/dashboard.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_dashboard.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_play_update.png"></td>
+</table>
+<table>
+ <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_download_progress.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_play_update.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_dashboard.png"></td>
 </table>
 
 # Design Inspiration

@@ -78,6 +78,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLater"
                 style="@style/SweetButtonStyle.Bordered"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
@@ -87,6 +88,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDownloadInstall"
                 style="@style/SweetButtonStyle.Bordered"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
@@ -108,12 +110,14 @@
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/ProgressBarStyle"
                 android:scaleX="0.5"
                 android:scaleY="0.5" />
 
             <TextView
                 android:id="@+id/tvUpdateProgress"
                 style="@style/SweetButtonStyle.Bordered"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_padding_16dp"
