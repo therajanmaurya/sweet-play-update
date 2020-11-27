@@ -113,14 +113,14 @@ src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_gener
 
 ## Sweet Play Designs
 <table>
-  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/dashboard.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/main_dashboard.png"></td>
   <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_dashboard.png"></td>
   <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_play_update.png"></td>
 </table>
 <table>
  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_download_progress.png"></td>
-  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_play_update.png"></td>
-  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_dashboard.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_install_update.png"></td>
+  <td><img src="https://raw.githubusercontent.com/therajanmaurya/Sweet-Play-Update/master/art/bottom_sheet_install.png"></td>
 </table>
 
 # Design Inspiration
