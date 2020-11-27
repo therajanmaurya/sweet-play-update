@@ -23,7 +23,8 @@ class SweetPlayAppUpdaterBottomSheet(
     private val title: String,
     private val description: String,
     private val headerImage: Int,
-    private val typeface: Typeface? = null
+    private val typeface: Typeface? = null,
+    private val background: Int
 ) : BottomSheetDialogFragment(), InstallStateUpdatedListener {
 
     private lateinit var appUpdateManager: AppUpdateManager
@@ -35,8 +36,10 @@ class SweetPlayAppUpdaterBottomSheet(
         fun newInstant(
             title: String,
             description: String,
-            headerImage: Int
-        ) = SweetPlayAppUpdaterBottomSheet(title, description, headerImage)
+            headerImage: Int,
+            typeface: Typeface?,
+            background: Int
+        ) = SweetPlayAppUpdaterBottomSheet(title, description, headerImage, typeface, background)
 
         const val REQUEST_CODE_FLEXIBLE_UPDATE = 17363
     }
@@ -57,8 +60,9 @@ class SweetPlayAppUpdaterBottomSheet(
             title = this@SweetPlayAppUpdaterBottomSheet.title
             description = this@SweetPlayAppUpdaterBottomSheet.description
             headerImage = this@SweetPlayAppUpdaterBottomSheet.headerImage
+            bsBackground = this@SweetPlayAppUpdaterBottomSheet.background
 
-            typeface?.let {
+            /*typeface?.let {
                 tvUpdateAvailable.typeface = it
                 tvUpdateAvailableMessage.typeface = it
                 tvUpdateProgress.typeface = it
@@ -68,7 +72,7 @@ class SweetPlayAppUpdaterBottomSheet(
                 btnDownloadInstall.typeface = it
                 btnCancel.typeface = it
                 btnOk.typeface = it
-            }
+            }*/
         }
         return binding.root
     }

@@ -16,7 +16,7 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="MaterialButtonStyle.Bordered" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="SweetButtonStyle.BorderedOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_height">48dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
